@@ -1,0 +1,7 @@
+body { padding: 20px; }
+.task-board { display: flex; justify-content: space-between; }
+.task-column { flex: 1; padding: 10px; border: 1px solid #ddd; min-height: 400px; }
+.task { padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; background-color: #f9f9f9; cursor: grab; }
+.overdue { background-color: #f8d7da; }
+.nearing-deadline { background-color: #fff3cd; }
+.drag-over { background-color: #e2e2e2; }
