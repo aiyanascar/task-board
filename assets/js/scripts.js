@@ -6,7 +6,7 @@ $(document).ready(function () {
     }
 
     function renderTasks() {
-        $('.task-column').empty();
+        $('.tasks').empty();
         tasks.forEach(task => {
             const taskElement = $(`<div class="task" draggable="true">
                 <h5>${task.title}</h5>
@@ -14,9 +14,11 @@ $(document).ready(function () {
                 <small>Deadline: ${task.deadline}</small>
                 <button class="btn btn-danger btn-sm delete-task">Delete</button>
             </div>`);
-            if (dayjs(task.deadline).isBefore(dayjs())) {
+            const deadline = dayjs(task.deadline);
+            const now = dayjs();
+            if (deadline.isBefore(now, 'day')) {
                 taskElement.addClass('overdue');
-            } else if (dayjs(task.deadline).isBefore(dayjs().add(3, 'day'))) {
+            } else if (deadline.isBefore(now.add(3, 'day'), 'day')) {
                 taskElement.addClass('nearing-deadline');
             }
             taskElement.find('.delete-task').click(() => {
@@ -24,7 +26,7 @@ $(document).ready(function () {
                 saveTasks();
                 renderTasks();
             });
-            $(`#${task.status}`).append(taskElement);
+            $(`#${task.status} .tasks`).append(taskElement);
         });
     }
 
